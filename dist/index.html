@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Speed Test</title>
-		<style>
+		<!-- <style>
 			html, body {
 				background: black;
 				color: white;
@@ -14,17 +14,22 @@
 			textarea {
 				background-color: #aaa;
 			}
-		</style>
+		</style> -->
+		<script type="module" crossorigin src="/assets/index-2f4b62cf.js"></script>
+		<link rel="stylesheet" href="/assets/index-e3b0c442.css">
 	</head>
 	<body>
-		<center> 
+		<div id="root"></div>
+		<!-- <center> 
 			<form method="POST" action="/test"> 
 				<button>Run Speedtest</button> 
 			</form>
 		</center>
-		<div><textarea id="reports" rows="20" cols="100"></textarea></div>
-		<script src="echarts.js"></script>
-		<script>
+		<div><textarea id="reports" rows="20" cols="100"></textarea></div> -->
+		
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.common.min.js" integrity="sha512-0wDoQXJkUrgPk8OvsJ/hSJiBVXiII1ixzjKddv6RQUoCTZsB9GRF4S6oszAqeSgU6FlSusayKNC2VTUpZsb9pA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+		<!-- <script>
 			fetch("/data")
 			.then(r => r.json())
 			.then(r => {
@@ -38,7 +43,7 @@
 				container.value = newOutput;
 
 
-				// var chart = echarts.init(document.getElementById("ass"))
+				var chart = echarts.init(document.getElementById("ass"))
 
 				// var option = {
 				// 	xAxis: {
@@ -61,6 +66,6 @@
 
 
 			})
-		</script>
+		</script> -->
 	</body>
 </html>
