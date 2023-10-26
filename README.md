@@ -1,2 +1,1 @@
-# speed-test
-A small node client intended to constantly run speed tests against your ISP and record the data
+- Install speedtest CLI @ speedtest.net/apps/cli

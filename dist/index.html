@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Speed Test</title>
+		<style>
+			html, body {
+				background: black;
+				color: white;
+				font-family: sans-serif;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			textarea {
+				background-color: #aaa;
+			}
+		</style>
+	</head>
+	<body>
+		<center> 
+			<form method="POST" action="/test"> 
+				<button>Run Speedtest</button> 
+			</form>
+		</center>
+		<div><textarea id="reports" rows="20" cols="100"></textarea></div>
+		<script src="echarts.js"></script>
+		<script>
+			fetch("/data")
+			.then(r => r.json())
+			.then(r => {
+				const container = document.getElementById("reports");
+				let newOutput = "";
+
+				r.reverse().forEach(each => {
+					newOutput += `Speed: ${parseInt(each.download.bandwidth / 1000 / 100)} Mbps @ ${new Date(each.timestamp)}\n`;
+				})
+
+				container.value = newOutput;
+
+
+				// var chart = echarts.init(document.getElementById("ass"))
+
+				// var option = {
+				// 	xAxis: {
+				// 		type: "dates",
+				// 		data: [1,2,3]
+				// 	},
+				// 	yAxis: {
+				// 		type: "value"
+				// 	},
+				// 	series: [
+				// 		{
+
+				// 			data: [1,2,3],
+				// 			type: "line"
+				// 		}
+				// 	]
+				// }
+
+				// chart.setOption(option)
+
+
+			})
+		</script>
+	</body>
+</html>
