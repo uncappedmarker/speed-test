@@ -44,7 +44,7 @@ function recordTest(callback) {
 		if (callback) {
 			callback(result);
 		}
-		log.info({ result }, `Test complete`);
+		// log.info({ result }, `Test complete`);
 	});
 }
 
