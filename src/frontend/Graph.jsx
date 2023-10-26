@@ -15,7 +15,7 @@ export default function Graph() {
 		fetch("/data")
 			.then((r) => r.json())
 			.then((r) => {
-				const rows = r.reverse();
+				const rows = r;
 
 				const values = [...rows].map((each) => parseInt(each.download.bandwidth / 1000 / 100));
 				let avg = 0;
