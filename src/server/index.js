@@ -36,7 +36,9 @@ app.get("/data", (req, res) => {
 function recordTest(callback) {
 	exec(COMMAND, (err, stdout, stderr) => {
 		if (err || stderr) {
-			return res.send("Error while testing internet speed.");
+			console.log(`Error @ ${new Date()}`);
+			console.log(err, stderr);
+			return;
 		}
 		const result = JSON.parse(stdout);
 		const filename = path.resolve("tests", `${new Date().getTime()}.json`);
