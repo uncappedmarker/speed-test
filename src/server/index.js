@@ -5,6 +5,7 @@ const app = express();
 const { exec } = require("child_process");
 const bunyan = require("bunyan");
 const log = bunyan.createLogger({ name: "speed-test" });
+const { blankEntry } = require("./blank");
 
 const config = require("config");
 const INTERVAL = config.get("interval");
@@ -35,18 +36,23 @@ app.get("/data", (req, res) => {
 
 function recordTest(callback) {
 	exec(COMMAND, (err, stdout, stderr) => {
+		let result;
 		if (err || stderr) {
+			// Yell about it
 			console.log(`Error @ ${new Date()}`);
 			console.log(err, stderr);
-			return;
+
+			// Write a blank one
+			result = { ...blankEntry, timestamp: new Date().toISOString().toString() };
+		} else {
+			result = JSON.parse(stdout);
 		}
-		const result = JSON.parse(stdout);
+
 		const filename = path.resolve("tests", `${new Date().getTime()}.json`);
 		fs.writeFileSync(filename, JSON.stringify(result));
 		if (callback) {
 			callback(result);
 		}
-		// log.info({ result }, `Test complete`);
 	});
 }
 
@@ -68,7 +74,7 @@ setInterval(
 	() => {
 		recordTest();
 	},
-	1000 * 60 * INTERVAL,
+	1000 * 60 * INTERVAL
 );
 
 // Server
