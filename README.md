@@ -35,3 +35,21 @@ Then run `speedtest --accept-license`
 - `port` (number) - The port this runs on
 - `output` (string) - The name of the folder we collect tests to
 - `command` (string) - The command we run to get the speedtest
+
+## Make Run At Boot
+
+Make a file
+
+```bash
+sleep 5
+screen -dm bash -c 'cd ~/Documents/speed-test/; npm start'
+```
+
+
+
+```bash
+# Edit bashrc
+sudo nano /home/jaime/.bashrc
+# Make it run
+/home/jaime/Documents/startup.sh
+```
