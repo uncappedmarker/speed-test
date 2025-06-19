@@ -4,6 +4,9 @@
 
    ```bash
    curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+   ```
+
+   ```bash
    sudo apt-get install speedtest
    ```
 
@@ -15,10 +18,15 @@
 
 3. **Make Cron Job**:
 
+   Open Crontab
+
    ```bash
-   # Open Crontab
    crontab -e
-   # Set for every 30 minutes
+   ```
+
+   Set for every 30 minutes
+
+   ```bash
    */30 * * * * cd ~/Documents/speedtest && /usr/bin/npm start >> ~/Documents/speedtest/cron.log 2>&1
    ```
 
