@@ -1,6 +1,0 @@
-{
-	"output_location": "tests",
-	"port": 4000,
-	"interval": 30,
-	"command": "speedtest -f json-pretty -u bps"
-}

@@ -103,3 +103,9 @@ typings/
 .tern-port
 
 tests/*
+new/node_modules/
+new/tests/
+config/local.json
+new/config/local.json
+error.log
+cron.log

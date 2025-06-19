@@ -1,20 +1,36 @@
-# Speed Test
+## Deployment
 
-A utility intended to sit and run speed tests on a cadence.
+1. **Install [speedtest-cli](https://www.speedtest.net/apps/cli) v2**:
 
-## Installation
+   ```bash
+   curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+   sudo apt-get install speedtest
+   ```
 
-- Install speedtest CLI @ [speedtest.net/apps/cli](https://www.speedtest.net/apps/cli)
-- Install Node 20.x
-- Run `npm ci / npm start`
+2. **Install Dependencies**:
 
-## Development
+   ```bash
+   npm ci
+   ```
 
-- `npm run dev`
+3. **Make Cron Job**:
 
-## Config
+   ```bash
+   # Open Crontab
+   crontab -e
+   # Set for every 30 minutes
+   */30 * * * * cd ~/Documents/speedtest && /usr/bin/npm start >> ~/Documents/speedtest/cron.log 2>&1
+   ```
 
-- `interval` (number) - The interval the tests are expected to run
-- `port` (number) - The port this runs on
-- `output` (string) - The name of the folder we collect tests to
-- `command` (string) - The command we run to get the speedtest
+## Developing
+
+1. **Install dependencies**:
+
+   ```bash
+   npm ci
+   ```
+
+2. **Compile TypeScript**:
+   ```bash
+   npm run dev
+   ```
