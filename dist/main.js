@@ -66,6 +66,6 @@ async function main() {
     });
 }
 (async () => {
-    log.info(`Starting speed test @ ${new Date()}`);
+    log.debug(`Starting speed test @ ${new Date()}`);
     await main();
 })();
