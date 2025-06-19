@@ -2,20 +2,23 @@
 	"name": "speedtest",
 	"version": "1.0.0",
 	"main": "src/app.ts",
+	"type": "module",
 	"engines": {
 		"node": ">=22.0.0"
 	},
 	"scripts": {
-		"start": "node dist/main.js",
+		"start": "node dist/main.js | bunyan -o short",
 		"build": "tsc",
-		"dev": "ts-node-dev src/main.ts"
+		"upload": "node ./dist/upload-json.js | bunyan -o short",
+		"dev": "ts-node-dev src/main.ts | bunyan -o short"
 	},
 	"dependencies": {
 		"bunyan": "^1.8.15",
 		"config": "^3.3.12",
 		"fs": "^0.0.1-security",
 		"mysql2": "^3.14.1",
-		"path": "^0.12.7"
+		"path": "^0.12.7",
+		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
 		"@types/bunyan": "^1.8.11",

@@ -6,6 +6,7 @@ import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import { SpeedtestResult } from "./types/tests";
+import { v4 as uuidv4 } from "uuid";
 
 import config from "config";
 const MACHINE_ID: number = config.get("machine_id");
@@ -17,7 +18,7 @@ if (isNaN(MACHINE_ID) || MACHINE_ID < 1) {
 }
 
 const ERROR_LOG_FILENAME: string = "error.log";
-const ERROR_LOG = path.resolve("./error.log");
+const ERROR_LOG = path.resolve("./", ERROR_LOG_FILENAME);
 const COMMAND: string = config.get("command");
 const DB_CONFIG: {
 	user: string;
@@ -50,7 +51,9 @@ async function main() {
 			);
 		} else {
 			result = JSON.parse(stdout);
-			log.info(result);
+
+			// Make a unique UUID for the result
+			const uuid = uuidv4();
 
 			const insertQuery = `
                 INSERT INTO zamboni.test_results (
@@ -59,9 +62,10 @@ async function main() {
                     ping,
                     isp,
                     timestamp,
-                    from_machine
+                    from_machine,
+					uuid
                 )
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             `;
 			const values = [
 				result.download,
@@ -70,12 +74,12 @@ async function main() {
 				result.client.isp,
 				result.timestamp,
 				MACHINE_ID,
+				uuid,
 			];
 
 			const client = await createConnection();
 			client.execute(insertQuery, values);
 			await client.end();
-			log.info(`Inserted result into database: ${JSON.stringify(result)}`);
 		}
 	});
 }
