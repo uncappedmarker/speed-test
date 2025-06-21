@@ -45,16 +45,18 @@ async function main() {
                     ping,
                     isp,
                     timestamp,
+					test_timestamp,
                     from_machine,
 					uuid
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `;
             const values = [
-                result.download,
-                result.upload,
+                result.download / 10,
+                result.upload / 10,
                 result.ping,
                 result.client.isp,
+                result.timestamp,
                 result.timestamp,
                 MACHINE_ID,
                 uuid,
