@@ -42,6 +42,31 @@ async function main() {
 	let result: SpeedtestResult;
 	exec(COMMAND, async (err, stdout, stderr) => {
 		if (err || stderr) {
+			// Try to record it
+
+			// Make a unique UUID for the result
+			const uuid = uuidv4();
+
+			const insertQuery = `
+				INSERT INTO zamboni.test_failures (
+					error_message,
+					test_timestamp,
+					from_machine,
+					uuid
+				)
+				VALUES (?, ?, ?, ?)
+			`;
+			const values = [
+				stderr || err?.message || "unknown error",
+				new Date(),
+				MACHINE_ID,
+				uuid,
+			];
+
+			const client = await createConnection();
+			client.execute(insertQuery, values);
+			await client.end();
+
 			// Yell about it
 			log.error({ err, stderr }, `Error @ ${new Date()}`);
 			fs.appendFileSync(
@@ -61,7 +86,7 @@ async function main() {
                     upload,
                     ping,
                     isp,
-		test_timestamp,
+					test_timestamp,
                     from_machine,
 					uuid
                 )
