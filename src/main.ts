@@ -69,8 +69,8 @@ async function main() {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `;
 			const values = [
-				result.download / 10,
-				result.upload / 10,
+				result.download,
+				result.upload,
 				result.ping,
 				result.client.isp,
 				result.timestamp,
